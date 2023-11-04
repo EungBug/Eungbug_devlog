@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import NavBar from '@/components/NavBar';
 
 export const metadata: Metadata = {
   title: 'Eungbug Devlog',
@@ -12,8 +13,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body>{children}</body>
+    <html lang="ko" className='font-Pretendard'>
+      <body className={`w-full flex flex-col items-center px-5 py-3`}>
+        <header className={`w-full max-w-3xl flex justify-between items-center my-1`}>
+          <NavBar />
+        </header>
+        <main className='w-full max-w-3xl'>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
