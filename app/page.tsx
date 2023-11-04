@@ -1,6 +1,10 @@
+import Introduce from "@/components/Introduce";
+
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="flex flex-col">
+      <Introduce />
+    </div>
   );
 };
 
