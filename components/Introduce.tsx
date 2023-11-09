@@ -1,16 +1,17 @@
 import Image from "next/image";
+import Me from '/public/images/me.jpg';
 
 // 소개 컴포넌트
 const Introduce = () => {
   return (
     <div>
       <div className={'flex gap-5 text-3xl font-extrabold mb-5'}>
-        <span>👩🏻‍💻</span>
-        <span>EungBug</span>
+        <span>👋🏻</span>
+        <span>Eung-bug</span>
       </div>
       <div className={'flex justify-center items-center flex-col sm:flex-row gap-10'}>
         <Image
-          src={'/me.jpg'}
+          src={Me}
           alt="이은비"
           width={300}
           height={300}
