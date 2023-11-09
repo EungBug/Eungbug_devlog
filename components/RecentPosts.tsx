@@ -1,5 +1,6 @@
 import { Post } from "contentlayer/generated";
 import Link from "next/link";
+import PostItem from "./PostItem";
 
 
 type RecentPostsProps = {
@@ -16,13 +17,7 @@ const RecentPosts = ({ posts }: RecentPostsProps) => {
       {/* 게시글 목록 */}
       <div>
         {
-          posts.map(post => (
-            <Link href={`/blog/${post._id}`} className="w-full flex flex-col p-2">
-              <p className="text-sm mb-2 text-main font-medium">{post.date}</p>
-              <h2 className="text-xl font-bold hover:text-main 0 mb-2">{post.title}</h2>
-              <p className="text-gray-600">{post.description}</p>
-            </Link>
-          ))
+          posts.map(post => (<PostItem post={post} key={post._id} />))
         }
       </div>
 
