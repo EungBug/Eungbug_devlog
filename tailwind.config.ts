@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 
+import colors from 'tailwindcss/colors';
+
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -15,6 +17,14 @@ const config: Config = {
     },
     fontFamily: {
       Pretendard: ['Pretendard']
+    },
+    colors: {
+      transparent: colors.transparent,
+      white: colors.white,
+      red: colors.red,
+      blue: colors.blue,
+      gray: colors.gray,
+      main: '#6941C6'
     }
   },
   plugins: []
