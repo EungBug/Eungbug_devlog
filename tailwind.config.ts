@@ -29,6 +29,7 @@ const config: Config = {
       tag: '#FF8080' // 태그 기본 색상
     }
   },
+  safelist: ['bg-main', 'bg-line', 'bg-tag'],
   variants: {
     fill: ['hover', 'focus']
   },
