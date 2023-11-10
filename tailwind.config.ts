@@ -24,9 +24,9 @@ const config: Config = {
       red: colors.red,
       blue: colors.blue,
       gray: colors.gray,
-      main: '#6941C6'
+      main: '#75C2F6'
     }
   },
-  plugins: []
+  plugins: [require('@tailwindcss/typography')]
 };
 export default config;

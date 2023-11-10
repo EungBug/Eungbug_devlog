@@ -1,5 +1,7 @@
-import { allPosts } from "@/.contentlayer/generated";
+import { Post, allPosts } from "contentlayer/generated";
 import { notFound } from 'next/navigation';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import AnotherPostLink from "@/components/AnotherPostLink";
 
 type PostProps = {
   params: {
@@ -7,16 +9,37 @@ type PostProps = {
   };
 };
 
-const Post = async ({ params: { slug } }: PostProps) => {
+const PostPage = ({ params: { slug } }: PostProps) => {
   const post = allPosts.find(post => post._raw.flattenedPath === slug);
+  // post가 없는 경우 예외처리
   if (!post) {
     notFound();
   }
 
+  // MarkDown 컴포넌트 생성
+  const MDXComponent = useMDXComponent(post.body.code);
+
+  // 현재 포스트의 인덱스 찾기
+  const postIndex = allPosts.findIndex(p => p._id === post?._id);
+  // 이전글, 다음글 찾기
+  const prevPost: Post | null = allPosts[postIndex - 1] ?? null;
+  const nextPost: Post | null = allPosts[postIndex + 1] ?? null;
+
   return (
-    <div>
-      Post
-    </div>
+    <>
+      {/* prose 옵션 => Markdown 같은 언어의 스타일 지정 */}
+      <article className="prose max-w-full">
+        <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+        <p className="font-medium text-right">{post.date}</p>
+        <MDXComponent />
+      </article>
+
+      {/* 이전 게시글 / 다음 게시글 링크 */}
+      {
+        allPosts.length > 1 &&
+        <AnotherPostLink prevPost={prevPost} nextPost={nextPost} />
+      }
+    </>
   );
 };
 
@@ -26,4 +49,4 @@ export const generateStaticParams = async () => {
   return posts.map(post => ({ slug: post._raw.flattenedPath }));
 };
 
-export default Post;
+export default PostPage;
