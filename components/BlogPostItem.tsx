@@ -1,5 +1,6 @@
 import { Post } from "@/.contentlayer/generated";
 import Link from "next/link";
+import { getCategoryColor } from "@/utils/utils";
 
 type BlogPostItemProps = {
   post: Post;
@@ -11,6 +12,13 @@ const BlogPostItem = ({ post }: BlogPostItemProps) => {
       <p className="text-base mb-2 text-main font-medium">{post.date}</p>
       <h2 className="text-2xl font-bold hover:text-main 0 mb-2 hover:transition-colors hover:duration-500">{post.title}</h2>
       <p className="text-gray-600 text-lg">{post.description}</p>
+      <div className="flex gap-2 mt-2">
+        {
+          post.category.map(category => (
+            <span className={`py-1 px-2 rounded-2xl text-sm ${getCategoryColor(category)}`}>{category}</span>
+          ))
+        }
+      </div>
     </Link>
   );
 };

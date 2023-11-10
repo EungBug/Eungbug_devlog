@@ -24,7 +24,9 @@ const config: Config = {
       red: colors.red,
       blue: colors.blue,
       gray: colors.gray,
-      main: '#75C2F6'
+      main: '#75C2F6',
+      lime: '#D2DE32',
+      tag: '#FF8080' // 태그 기본 색상
     }
   },
   variants: {
