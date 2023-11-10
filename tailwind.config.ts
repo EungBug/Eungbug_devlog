@@ -27,6 +27,9 @@ const config: Config = {
       main: '#75C2F6'
     }
   },
+  variants: {
+    fill: ['hover', 'focus']
+  },
   plugins: [require('@tailwindcss/typography')]
 };
 export default config;
