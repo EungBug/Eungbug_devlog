@@ -6,6 +6,9 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Eungbug Devlog',
   description: 'Eungbug 개발 블로그',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
