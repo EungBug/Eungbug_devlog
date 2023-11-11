@@ -15,12 +15,11 @@ const RecentPosts = ({ posts }: RecentPostsProps) => {
         <span>최근 게시물</span>
       </div>
       {/* 게시글 목록 */}
-      <div>
+      <div className="pb-5">
         {
           posts.map(post => (<PostItem post={post} key={post._id} />))
         }
       </div>
-
     </section>
   );
 };
