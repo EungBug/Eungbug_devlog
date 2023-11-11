@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Eungbug-Devlog
 
-## Getting Started
+[📝블로그 보러가기](https://release.d3vn0oj9a8o861.amplifyapp.com/)
 
-First, run the development server:
+Next.js 스터디를 위해 Next.js 프레임워크를 사용하여 개발 블로그를 구현했습니다.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 기술스택
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js
+- TypeScript
+- Tailwind CSS
+- AWS Amplify
+- Git/Github
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 트러블 슈팅
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [x] 클라이언트 컴포넌트 이슈
+- [ ] 배포 사이트에서 파비콘이 적용되지 않는 이슈
 
-## Learn More
+### 앞으로 추가할 기능
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] 디테일한 반응형 디자인
+- [ ] 다크모드 테마
+- [ ] 댓글 기능
+- [ ] 블로그 포스트 페이지네이션
+- [ ] 블로그 포스트 이미지 처리
+- [ ] SEO 최적화 처리
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
