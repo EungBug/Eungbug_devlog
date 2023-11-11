@@ -14,7 +14,10 @@ const Blog = () => {
         <span>📒</span>
         <span>Blog</span>
       </div>
-      <PostList categories={Array.from(categories)} />
+      <PostList
+        posts={posts}
+        categories={['All', ...Array.from(categories)]}
+      />
     </section>
   );
 };
