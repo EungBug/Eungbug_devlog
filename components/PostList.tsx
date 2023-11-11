@@ -17,7 +17,7 @@ const PostList = ({ categories }: Props) => {
     selected === ALL_POST ? allPosts : allPosts.filter(post => post.category.includes(selected));
 
   return (
-    <div className="flex flex-col sm:flex-row-reverse gap-5">
+    <div className="flex flex-col sm:flex-row-reverse">
       <CategoryTab
         categories={categories}
         selected={selected}

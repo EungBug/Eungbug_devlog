@@ -20,7 +20,7 @@ const PostItem = ({ post }: PostItemProps) => {
         {post.category.map(category => (
           <li
             key={category}
-            className={`py-1 px-2 rounded-2xl text-sm ${getCategoryColor(category)}`}>
+            className={`py-1 px-2 rounded-2xl text-sm text-white ${getCategoryColor(category)}`}>
             {category}
           </li>
         ))}
