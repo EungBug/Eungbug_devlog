@@ -26,10 +26,11 @@ const config: Config = {
       gray: colors.gray,
       main: '#75C2F6',
       lime: '#D2DE32',
-      tag: '#FF8080' // 태그 기본 색상
+      tag: '#FF8080', // 태그 기본 색상
+      category: '#FDC725'
     }
   },
-  safelist: ['bg-main', 'bg-line', 'bg-tag'],
+  safelist: ['bg-main', 'bg-line', 'bg-tag', 'bg-category'],
   variants: {
     fill: ['hover', 'focus']
   },
