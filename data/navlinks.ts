@@ -4,8 +4,8 @@ interface NavLink {
 }
 
 const navlinks: NavLink[] = [
-  { title: 'Home', link: '/' },
-  { title: 'Blog', link: '/blog' }
+  { title: '🏠Home', link: '/' },
+  { title: '📝Blog', link: '/blog' }
 ];
 
 export default navlinks;
