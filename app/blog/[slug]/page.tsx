@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Post, allPosts } from 'contentlayer/generated';
 import { notFound } from 'next/navigation';
 import { useMDXComponent } from 'next-contentlayer/hooks';
@@ -6,6 +7,14 @@ import AnotherPostLink from '@/components/AnotherPostLink';
 type PostProps = {
   params: {
     slug: string;
+  };
+};
+
+export const generateMetadata = async ({ params: { slug } }: PostProps): Promise<Metadata> => {
+  const post = allPosts.find(post => post._raw.flattenedPath === slug);
+  return {
+    title: post?.title,
+    description: post?.description
   };
 };
 

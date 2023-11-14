@@ -1,5 +1,11 @@
 import { allPosts } from '@/.contentlayer/generated';
 import PostList from '@/components/PostList';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog Posts',
+  description: 'Eungbug 개발 블로그 포스트'
+};
 
 const Blog = () => {
   const posts = allPosts;

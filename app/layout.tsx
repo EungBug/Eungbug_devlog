@@ -4,7 +4,10 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Eungbug Devlog',
+  title: {
+    default: 'Eungbug Devlog',
+    template: 'Eungbug Devlog | %s'
+  },
   description: 'Eungbug 개발 블로그',
   icons: {
     icon: '/favicon.ico'
