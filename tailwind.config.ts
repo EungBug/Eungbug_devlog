@@ -8,6 +8,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
+  darkMode: 'class', // class 전략을 사용하여 수동으로 다크모드 전환
   theme: {
     extend: {
       backgroundImage: {
@@ -29,7 +30,8 @@ const config: Config = {
       tag: '#FF8080', // 태그 기본 색상
       category: '#FDC725',
       web: '#F99417',
-      fe: '#3D30A2'
+      fe: '#3D30A2',
+      darkblack: '#121214'
     }
   },
   safelist: ['bg-main', 'bg-til', 'bg-tag', 'bg-category', 'bg-web', 'bg-fe'],
