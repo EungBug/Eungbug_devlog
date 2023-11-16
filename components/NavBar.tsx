@@ -8,7 +8,7 @@ import { FiSun } from 'react-icons/fi';
 import { FiMoon } from 'react-icons/fi';
 
 const NavBar = () => {
-  const [isDark, setIsDark] = useState(localStorage.getItem('theme') == 'dark' ? true : false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     isDark

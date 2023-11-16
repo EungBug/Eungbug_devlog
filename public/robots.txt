@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /exclude
+
+# Host
+Host: https://release.d3vn0oj9a8o861.amplifyapp.com/
+
+# Sitemaps
+Sitemap: https://release.d3vn0oj9a8o861.amplifyapp.com/sitemap.xml
