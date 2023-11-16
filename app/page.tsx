@@ -9,7 +9,7 @@ const Home = () => {
     .slice(0, 5);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-10">
       <Introduce />
       <RecentPosts posts={recentPosts} />
     </div>
