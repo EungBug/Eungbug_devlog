@@ -37,7 +37,7 @@ const PostPage = ({ params: { slug } }: PostProps) => {
   return (
     <>
       {/* prose 옵션 => Markdown 같은 언어의 스타일 지정 */}
-      <article className="prose max-w-full">
+      <article className="prose max-w-full dark:prose-invert">
         <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
         <p className="font-medium text-right">{new Date(post.date).toDateString()}</p>
         <MDXComponent />
