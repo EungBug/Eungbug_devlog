@@ -19,7 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="ko"
       className="font-Pretendard">
-      <body className={`w-full flex flex-col items-center px-5 py-3 h-screen`}>
+      <body
+        className={`w-full flex flex-col items-center px-5 py-3 h-screen bg-white dark:bg-darkblack`}>
         <header className={`w-full max-w-3xl flex justify-between items-center my-1`}>
           <NavBar />
         </header>

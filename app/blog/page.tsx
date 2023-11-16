@@ -16,7 +16,7 @@ const Blog = () => {
   return (
     <section>
       {/* 타이틀 */}
-      <div className="flex gap-5 text-3xl font-extrabold mb-10">
+      <div className="flex gap-5 text-3xl font-extrabold mb-10 text-white">
         <span>📒</span>
         <span>Blog</span>
       </div>

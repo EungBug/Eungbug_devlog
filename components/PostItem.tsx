@@ -12,10 +12,10 @@ const PostItem = ({ post }: PostItemProps) => {
       href={`/blog/${post._raw.flattenedPath}`}
       className="w-full flex flex-col p-2">
       <p className="text-sm mb-2 text-main font-medium">{post.date}</p>
-      <h2 className="text-xl font-bold hover:text-main 0 mb-2 hover:transition-colors hover:duration-500">
+      <h2 className="text-xl font-bold hover:text-main 0 mb-2 hover:transition-colors hover:duration-500 dark:text-white dark:hover:text-main">
         {post.title}
       </h2>
-      <p className="text-gray-600">{post.description}</p>
+      <p className="text-gray-600 dark:text-gray-400">{post.description}</p>
       <ul className="flex flex-wrap gap-1 mt-2">
         {post.category.map(category => (
           <li
