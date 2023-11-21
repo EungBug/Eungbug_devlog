@@ -19,6 +19,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="ko"
       className="font-Pretendard">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="rYeNxTmzWw8kwL2DXcrlzyNdw_FA1lsJUzWah8PIUow"
+        />
+      </head>
       <body
         className={`w-full flex flex-col items-center px-5 py-3 h-screen bg-white dark:bg-darkblack`}>
         <header className={`w-full max-w-3xl flex justify-between items-center my-1`}>
