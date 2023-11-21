@@ -1,0 +1,110 @@
+---
+title: 모듈 번들러 Webpack이란?
+date: 2023-11-18
+description: Webpack에 대해 알아보자!
+category: [TIL, Etc]
+---
+
+# Webpack 이란?
+
+> 오픈 소스 자바스크립트 모듈 번들러로써 여러개로 나눠져 있는 파일들을 **하나의 자바스크립트 코드**로 압축하고 최적화하는 라이브러리이다.
+
+Webpack의 장점
+
+- 여러 파일의 자바스크립트 코드를 압축하여 최적화 할 수 있기 때문에 로딩에 대한 네트워크 비용을 줄일 수 있다.
+- 모듈 단위로 개발이 가능하여 가독성과 유지보수가 쉽다.
+
+CRA 같은 패키지를 사용할 경우 내부에서 웹팩을 사용해서 개발 환경을 미리 세팅해준다.
+
+### Webpack의 구조
+
+`webpack.config.js`는 Webpack이 실행될 때 참조하는 설정 파일이다.
+
+#### Entry
+
+Entry는 최초 진입점으로 `시작점 경로를 지정`하는 옵션이며, 여러 개의 엔트리를 설정 할 수도 있다.  
+Webpack은 Entry를 통해서 필요한 모듈을 로딩하고 하나의 파일로 묶는다.
+
+```js
+entry: './src/index.tsx',
+```
+
+#### Output
+
+Output은 `번들링 결과물을 처리해 위치할 경로`이다.  
+`path.resolve()` 함수를 통해 절대경로 주소를 얻을 수 있다.
+
+```js
+output: {
+	filename: 'bundle.js',
+	path: path.resolve(dirname, 'dist'),
+	clean: true
+}
+```
+
+#### Loader
+
+Webpack은 오직 JavaScript와 Json만 이해할 수 있는데, 로더는 **다른 타입의 파일(Image, CSS, StyleSheet 등)이나 다른 언어(TypeScript)를 Webpack이 이해하고 처리 가능하도록 변환**한다.
+
+```js
+{
+	test: /\.(ts|tsx|js|jsx)$/, // 정규식에 해당되는 모든 파일
+	exclude: /node_modules/,
+	use: [ { loader: 'babel-loader' }, ... ] // babel-loader를 적용
+}
+```
+
+```js
+{
+	test: /\.css$/, // .css로 끝나느 모든 파일
+	use: ["style-loader", "css-loader"], // style-loader, css-loader 적용
+},
+```
+
+`css-loader` : 빌드 시 css코드가 JavaScript코드로 변환됨.
+`style-loader` : 모듈로 변경된 스타일 시트는 DOM에 추가 되어야 브라우저가 해석할 수 있기 때문에 css를 DOM에 삽입함.
+
+#### Plugin
+
+Webpack의 기본적인 동작에 **추가적인 기능들**을 제공하는 속성으로 해당 결과물의 형태를 바꾸는 역할을 한다.
+
+`HtmlWebpackPlugin`은 Webpack 번들을 제공하는 HTML 파일 생성을 단순화 한다.
+
+```js
+plugins: [
+  new HtmlWebpackPlugin({
+    template: '/index.html'
+  })
+];
+```
+
+## Webpack 기본 설정
+
+### Webpack 의존성 설치
+
+```bash
+npm i -D
+webpack       // 모듈 번들러인 웹팩
+webpack-cli   // 웹팩의 커맨드 라인 인터페이스
+webpack-dev-server  // 개발 서버 제공
+webpack-merge // 여러개 config 파일 구분해놓고 합쳐서 쓰기 위해서
+```
+
+### babel preset 설치
+
+ES6 문법으로 작성된 코드를 ES5로 변환하기 위해 (브라우저 호환성)
+
+```bash
+npm i -D
+@babel/core         // 바벨을 사용하기 위해 꼭 포함되어야 하는 패키지
+@babel/preset-env   // plugin 들을 포함한 preset
+@babel/preset-react // 리액트와 관련된 plugin 들을 포함한 preset
+```
+
+### Webpack 설정 파일들
+
+```
+webpack.config.js        // 공통 설정 파일
+webpack.dev.config.js    // 개발용 파일
+webpack.prod.config.js   // 배포용 파일
+```

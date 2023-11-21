@@ -8,5 +8,6 @@ export const categories: Category[] = [
   { tag: 'react', color: 'bg-main' },
   { tag: 'TIL', color: 'bg-til' },
   { tag: 'Web', color: 'bg-web' },
-  { tag: 'FE', color: 'bg-fe' }
+  { tag: 'FE', color: 'bg-fe' },
+  { tag: 'TDD', color: 'bg-tdd' }
 ];

@@ -1,0 +1,107 @@
+---
+title: Jest - Unit Test 입문
+date: 2023-11-21
+description: Jest를 이용한 React Unit Test 알아보자!
+category: [TIL, TDD]
+---
+
+# Jest
+
+Jest는 JavaScript 테스트 프레임워크로 테스트, 스냅샷 비교, mocking, coverage 등을 구축할 수 있는 강력한 API를 제공한다.
+
+Jest는 `__tests__`폴더에 .js 접미사가 있는 파일, `.test.js` 접미사가 있는 파일, `.spec.js` 접미사가 있는 파일을 찾아 테스트한다.
+
+## Test 코드 작성
+
+test 코드를 작성하기 위해서는 `it()` 또는 `test()` 블록을 사용한다.  
+jest에서는 it()과 test()를 통해 기본 테스트를 진행하고 둘은 동일한 기능을 수행한다.
+
+`describe()` 블록을 사용하면 테스트 단위들을 하나로 묶어서 관리할 수 있다. 중첩이 가능해서 테스트를 그룹화해서 관리할 수 있다.
+
+```
+it('테스트 코드 설명', '테스트 할 코드')
+test('테스트 코드 설명', '테스트 할 코드')
+```
+
+```
+// add 함수
+// export const add = (a: number, b: number): number => {
+	return a + b;
+}
+
+// 테스트 코드
+it('add func', () => {
+	// expect() = 기대
+	expect(add(1, 2)).toEqual(3);
+})
+
+```
+
+## expect
+
+expect는 값을 테스트할 때 사용된다.  
+`expect()` 안에 테스트할 변수나 값(검증 대상)을 넣고 `matcher 함수`들과 같이 사용된다.
+
+## matchers
+
+### toBe() / toEqual()
+
+`toBe()`는 기본 값을 단순 비교하거나, 객체 인스턴스의 참조 ID를 확인하는데 사용한다.
+`toEequal()`은 배열이나 객체 내부까지 깊은 비교를 할 때 사용한다. 두 객체의 내부 값만 비교하는 것이지 참조 ID가 동일한지 비교를 하진 않는다.
+
+`toBe()`는 값이 정확하게 같은지 평가한다. 때문에 `객체`를 평가할 때는 `toEequal()`을 사용해야 한다.
+
+### 이외 matchers
+
+- toBeNull
+- toBeUndefined
+- toBeDefined
+- toBeTruthy
+- toBeFalsy
+
+[Jest Matchers](https://jestjs.io/docs/using-matchers)
+
+## beforeEach / afterEach
+
+`beforeEach`는 각 테스트가 실행되기 전에 실행되는 전처리기이다.
+`afterEach`는 각 테스트가 실행된 후에 실행되는 후처리기이다.
+
+## React에서의 유닛 테스트
+
+아래와 같은 Counter 컴포넌트의 테스트 코드 예시이다.
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button
+        className="prev"
+        onClick={() => setCount(count - 1)}>
+        &lt;
+      </button>
+      <p className="page">{count}</p>
+      <button
+        className="next"
+        onClick={() => setCount(count + 1)}>
+        &gt;
+      </button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+Counter 컴포넌트를 렌더링 한 후 class가 next인 element를 찾아서 click 이벤트를 실행했을 때, class가 page인 element의 text 값이 1과 같은지 검증하는 테스트 코드이다.
+
+```js
+it("click right arrow", () => {
+    const wrapper = shallow(<Counter />);
+    wrapper.find(".next").simulate("click");
+    expect(wrapper.find(".page").text()).toBe("1");
+```
+
+- shallow() : 리액트 컴포넌트를 렌더링 시켜준다.
