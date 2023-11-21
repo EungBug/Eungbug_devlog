@@ -15,7 +15,11 @@ type Props = {
 const PostList = ({ posts, categories }: Props) => {
   const [selected, setSelected] = useState(ALL_POST);
   const filtered =
-    selected === ALL_POST ? posts : posts.filter(post => post.category.includes(selected));
+    selected === ALL_POST
+      ? posts.sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
+      : posts
+          .filter(post => post.category.includes(selected))
+          .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
   return (
     <div className="flex flex-col sm:flex-row-reverse">

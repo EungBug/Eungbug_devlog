@@ -31,10 +31,11 @@ const config: Config = {
       category: '#FDC725',
       web: '#F99417',
       fe: '#3D30A2',
+      tdd: '#0C356A',
       darkblack: '#121214'
     }
   },
-  safelist: ['bg-main', 'bg-til', 'bg-tag', 'bg-category', 'bg-web', 'bg-fe'],
+  safelist: ['bg-main', 'bg-til', 'bg-tag', 'bg-category', 'bg-web', 'bg-fe', 'bg-tdd'],
   variants: {
     fill: ['hover', 'focus']
   },
