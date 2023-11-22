@@ -3,6 +3,7 @@ import { Post, allPosts } from 'contentlayer/generated';
 import { notFound } from 'next/navigation';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import AnotherPostLink from '@/components/AnotherPostLink';
+import Comments from '@/components/Comments';
 
 type PostProps = {
   params: {
@@ -50,6 +51,9 @@ const PostPage = ({ params: { slug } }: PostProps) => {
           nextPost={nextPost}
         />
       )}
+
+      {/* 댓글 */}
+      <Comments />
     </>
   );
 };

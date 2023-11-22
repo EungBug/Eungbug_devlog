@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog</loc><lastmod>2023-11-21T04:35:11.757Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com</loc><lastmod>2023-11-21T04:35:11.758Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/jest-test</loc><lastmod>2023-11-21T04:35:11.758Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/nextjs-start</loc><lastmod>2023-11-21T04:35:11.758Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/rendering-ssg-isr</loc><lastmod>2023-11-21T04:35:11.758Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
-<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/webpack</loc><lastmod>2023-11-21T04:35:11.758Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/jest-test</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/nextjs-start</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/rendering-ssg-isr</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://release.d3vn0oj9a8o861.amplifyapp.com/blog/webpack</loc><lastmod>2023-11-22T08:55:47.958Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
 </urlset>
