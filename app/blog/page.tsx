@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const Blog = () => {
-  const posts = allPosts;
+  const posts = allPosts.sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
   // 카테고리 추출
   const categories: Set<string> = new Set(posts.map(post => post.category).flat());
