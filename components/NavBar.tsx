@@ -1,5 +1,7 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useEffect, useMemo } from 'react';
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import navlinks from '@/data/navlinks';
@@ -8,18 +10,35 @@ import { FiSun } from 'react-icons/fi';
 import { FiMoon } from 'react-icons/fi';
 
 const NavBar = () => {
-  const [isDark, setIsDark] = useState(true);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    isDark
+    const isComment = document.querySelector('iframe.utterances-frame');
+    if (isComment) {
+      const utterancesTheme = theme === 'light' ? 'github-light' : 'photon-dark';
+      const utterancesEl = document.querySelector('iframe.utterances-frame') as HTMLIFrameElement;
+
+      utterancesEl?.contentWindow?.postMessage(
+        { type: 'set-theme', theme: utterancesTheme },
+        'https://utteranc.es/'
+      );
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    (theme ?? 'dark') === 'dark'
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');
-    console.log('바뀜');
-  }, [isDark]);
+  }, [theme]);
 
-  const handleChangeDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    setIsDark(event.target.checked);
+  const handleChangeDarkMode = () => {
+    setTheme((theme ?? 'dark') === 'dark' ? 'light' : 'dark');
+  };
+
+  const style = {
+    switch: `block h-7 w-12 rounded-full ${
+      theme === 'dark' ? 'bg-white' : 'bg-white border-category border'
+    }`
   };
 
   return (
@@ -34,32 +53,34 @@ const NavBar = () => {
         />
       </Link>
       <ul className="flex gap-5">
-        <label className="flex cursor-pointer select-none items-center">
-          <div className="relative">
-            <input
-              type="checkbox"
-              checked={isDark}
-              onChange={handleChangeDarkMode}
-              className="sr-only"
-            />
-            <div
-              className={`box block h-7 w-12 rounded-full ${
-                isDark ? 'bg-white' : 'bg-white border-category border'
-              }`}></div>
-            <div
-              className={`absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full transition bg-category ${
-                isDark ? 'translate-x-full bg-darkblack' : ''
-              }`}>
-              {isDark ? (
-                <FiMoon className="text-xs text-category" />
-              ) : (
-                <FiSun className="text-xs text-white" />
-              )}
+        <li key="theme_button">
+          <label className="flex cursor-pointer select-none items-center">
+            <div className="relative">
+              <input
+                type="checkbox"
+                checked={theme === 'dark'}
+                onChange={handleChangeDarkMode}
+                className="sr-only"
+              />
+              <div
+                className={`block h-7 w-12 rounded-full ${
+                  theme === 'dark' ? 'bg-white' : 'bg-white border-category border'
+                }`}></div>
+              <div
+                className={`absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full transition bg-category ${
+                  theme === 'dark' ? 'translate-x-full bg-darkblack' : ''
+                }`}>
+                {theme === 'dark' ? (
+                  <FiMoon className="text-xs text-category" />
+                ) : (
+                  <FiSun className="text-xs text-white" />
+                )}
+              </div>
             </div>
-          </div>
-        </label>
+          </label>
+        </li>
         {navlinks.map(nav => (
-          <li>
+          <li key={nav.title}>
             <Link
               href={nav.link}
               key={nav.title}
