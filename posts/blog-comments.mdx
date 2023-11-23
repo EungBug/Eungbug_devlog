@@ -1,0 +1,77 @@
+---
+title: utterances - Next.js 블로그에 댓글 기능 추가하기
+date: 2023-11-23
+description: 내가 만든 Next.js 블로그 포스트에 댓글을 달 수 있도록 utterances를 적용해보자!
+category: [Web, ETC]
+---
+
+# utterances - Next.js 블로그 댓글 기능 추가
+
+> Next.js 기반으로 만든 블로그 포스트에 댓글 기능을 추가하고자 utterances를 사용했다.  
+> utterances 는 광고가 없으며, Github 계정으로 로그인 후 댓글을 달 수 있다.  
+> 또한 댓글이 달리면 Github Repository의 Issue로 올라가는 방식이라 댓글에 대한 알림을 받을 수 있다.
+
+## utterances 적용하기
+
+1. 먼저, 댓글용 Repository를 생성한다. 해당 Repository Issues에 댓글들이 올라가게 된다.
+
+2. [utterances](https://github.com/apps/utterances)를 Github 계정에 설치한다. 이 때, 1번에서 만든 댓글용 Repository를 선택하면 된다.
+
+3. install 이후 script를 추가하기 위해 repo input에 생성했던 Repository를 입력한다. 추가로 블로그 포스트와 이슈를 어떻게 맵핑할 것인지 선택하는데 나는 pathname 방식을 선택했다.
+
+   <img
+     src="/blog/blog-comments/1.png"
+     width="400"
+   />
+
+4. theme까지 선택하고 나면 script가 자동으로 생성되는데 복사해서 사용하면 된다.
+
+   <img
+     src="/blog/blog-comments/2.png"
+     width="400"
+   />
+
+5. 댓글 컴포넌트를 생성 후 포스트 페이지에 추가해준다.
+   나의 경우 블로그에 다크모드를 적용하여 사용자가 선택한 테마에 따라 utterance의 테마가 변경되도록 적용했다.
+
+```tsx
+'use client';
+
+import React, { useEffect } from 'react';
+import { useTheme } from 'next-themes';
+const COMMENTS_ID = 'comments-container';
+
+export const Comments = () => {
+  const { resolvedTheme } = useTheme();
+  const utterancesTheme = resolvedTheme === 'light' ? 'github-light' : 'github-dark';
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'EungBug/eungbug_devlog_comments');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', utterancesTheme);
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    const comments = document.getElementById(COMMENTS_ID);
+
+    if (comments) comments.appendChild(script);
+
+    return () => {
+      const comments = document.getElementById(COMMENTS_ID);
+      if (comments) comments.innerHTML = '';
+    };
+  }, []);
+
+  return <div id={COMMENTS_ID} />;
+};
+
+export default Comments;
+```
+
+다 적용하고 나면 아래와 같이 댓글을 작성할 수 있는 컴포넌트가 렌더링 되고, Github 로그인 후 댓글 작성 시 댓글용 Repository에 Issue가 생성되고 메일로 알림까지 받을 수 있다.
+
+<img
+  src="/blog/blog-comments/3.png"
+  width="400"
+/>
