@@ -10,12 +10,14 @@ import { FiSun } from 'react-icons/fi';
 import { FiMoon } from 'react-icons/fi';
 
 const NavBar = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, systemTheme, setTheme } = useTheme();
 
   useEffect(() => {
+    console.log(systemTheme);
     const isComment = document.querySelector('iframe.utterances-frame');
     if (isComment) {
-      const utterancesTheme = theme === 'light' ? 'github-light' : 'photon-dark';
+      const utterancesTheme =
+        theme === 'system' ? systemTheme : theme === 'light' ? 'github-light' : 'photon-dark';
       const utterancesEl = document.querySelector('iframe.utterances-frame') as HTMLIFrameElement;
 
       utterancesEl?.contentWindow?.postMessage(
@@ -26,13 +28,13 @@ const NavBar = () => {
   }, [theme]);
 
   useEffect(() => {
-    (theme ?? 'dark') === 'dark'
+    (theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark'
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');
   }, [theme]);
 
   const handleChangeDarkMode = () => {
-    setTheme((theme ?? 'dark') === 'dark' ? 'light' : 'dark');
+    setTheme((theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark' ? 'light' : 'dark');
   };
 
   const style = {
@@ -58,19 +60,23 @@ const NavBar = () => {
             <div className="relative">
               <input
                 type="checkbox"
-                checked={theme === 'dark'}
+                checked={(theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark'}
                 onChange={handleChangeDarkMode}
                 className="sr-only"
               />
               <div
                 className={`block h-7 w-12 rounded-full ${
-                  theme === 'dark' ? 'bg-white' : 'bg-white border-category border'
+                  (theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark'
+                    ? 'bg-white'
+                    : 'bg-white border-category border'
                 }`}></div>
               <div
                 className={`absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full transition bg-category ${
-                  theme === 'dark' ? 'translate-x-full bg-darkblack' : ''
+                  (theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark'
+                    ? 'translate-x-full bg-darkblack'
+                    : ''
                 }`}>
-                {theme === 'dark' ? (
+                {(theme === 'system' ? systemTheme : theme ?? 'dark') === 'dark' ? (
                   <FiMoon className="text-xs text-category" />
                 ) : (
                   <FiSun className="text-xs text-white" />
