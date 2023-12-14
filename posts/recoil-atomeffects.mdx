@@ -1,0 +1,54 @@
+---
+title: Recoil 전역 state를 로컬스토리지에 저장하기
+date: 2023-11-30
+description: Recoil에서 state를 로컬스토리지에 저장하는 Atom Effects를 사용해보자!
+category: [TIL, Web]
+---
+
+# Recoil에서는 state를 로컬스토리지에 어떻게 저장할까?
+
+로그인 이후 로그인 한 사용자 정보를 전역 상태로 관리하면서
+로컬 스토리지에 저장해야 하는 경우가 많다.  
+이전에 Recoil을 사용했던 프로젝트에서는 `recoil-persist` 라는 라이브러리를
+사용하여 간단하게 작업했었다.  
+하지만 recoil-persist 라이브러리의 경우 자주 업데이트 되는 recoil에 비해 업데이트 주기가 길고 많지 않다.  
+그래서 다른 방법을 찾아보던 중 recoil 공식 문서에서
+`Atom Effets`를 사용하는 `Local Storage Persistence` 가이드가 있어 Atom Effects를 통해 상태를 관리해봤다.
+
+## Atom Effects
+
+> Atom Effects란 부수효과를 관리하고 Recoil의 atom을 초기화 또는 동기화 하기 위한 API이다.
+> 상태 지속성, 상태 동기화, 히스토리 관리, 로깅 등에 유용하다.
+
+```ts
+const localStorageEffect =
+  (key: string) =>
+  ({ setSelf, onSet }: any) => {
+    const savedValue = localStorage.getItem(key);
+    // setSelf -> Callbacks to set or reset the value of the atom.
+    if (savedValue != null) {
+      setSelf(JSON.parse(savedValue));
+    }
+
+    // onSet -> Subscribe to changes in the atom value.
+    onSet((newValue: any, _: any, isReset: boolean) => {
+      isReset ? localStorage.removeItem(key) : localStorage.setItem(key, JSON.stringify(newValue));
+    });
+  };
+
+export const toDoState = atom<IToDo[]>({
+  key: 'toDo',
+  default: [],
+  effects: [localStorageEffect('toDo')]
+});
+```
+
+`setSelf()` 함수는 연결된 atom의 값을 초기화하는 함수이다.  
+`onSet()` 함수는 atom의 값이 변경 되었을 때 실행되는 함수이다.  
+`isReset`은 useResetRecoilState()함수를 통해 atom의 상태가 default 값으로 reset 될 때 여부를 나타내는 플래그이다.
+
+Atom Effects는 key 값을 통해 localStorage와 atom의 상태를 동기화한다.  
+atom의 상태가 reset 된 경우 localStorage에서도 key에 해당되는 데이터를 삭제하고,
+상태 값이 변경된 경우엔 변경된 값(new Value)을 localStorage에 다시 저장하여 동기화 시키는 방식이다.
+
+실제로 로그인 한 UserState에 반영해보니 라이브러리 못지 않게 쉽고 간단하게 상태 값을 관리할 수 있었다.
