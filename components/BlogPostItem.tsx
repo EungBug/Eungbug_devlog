@@ -1,6 +1,7 @@
 import { Post } from '@/.contentlayer/generated';
 import Link from 'next/link';
 import { getCategoryColor } from '@/utils/utils';
+import dayjs from 'dayjs';
 
 type BlogPostItemProps = {
   post: Post;
@@ -11,7 +12,9 @@ const BlogPostItem = ({ post }: BlogPostItemProps) => {
     <Link
       href={`/blog/${post._raw.flattenedPath}`}
       className="w-full flex flex-col p-2">
-      <p className="text-base mb-2 text-main font-medium">{post.date}</p>
+      <p className="text-base mb-2 text-main font-medium">
+        {dayjs(post.date).format('YYYY-MM-DD')}
+      </p>
       <h2 className="text-2xl font-bold hover:text-main 0 mb-2 hover:transition-colors hover:duration-500 dark:text-white dark:hover:text-main">
         {post.title}
       </h2>
