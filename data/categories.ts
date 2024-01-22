@@ -9,5 +9,7 @@ export const categories: Category[] = [
   { tag: 'TIL', color: 'bg-til' },
   { tag: 'Web', color: 'bg-web' },
   { tag: 'FE', color: 'bg-fe' },
-  { tag: 'TDD', color: 'bg-tdd' }
+  { tag: 'TDD', color: 'bg-tdd' },
+  { tag: 'Flutter', color: 'bg-flutter' },
+  { tag: 'Error', color: 'bg-error' }
 ];

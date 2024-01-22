@@ -32,10 +32,22 @@ const config: Config = {
       web: '#F99417',
       fe: '#3D30A2',
       tdd: '#0C356A',
-      darkblack: '#121214'
+      darkblack: '#121214',
+      error: '#EE4400',
+      flutter: '#53C0F1'
     }
   },
-  safelist: ['bg-main', 'bg-til', 'bg-tag', 'bg-category', 'bg-web', 'bg-fe', 'bg-tdd'],
+  safelist: [
+    'bg-main',
+    'bg-til',
+    'bg-tag',
+    'bg-category',
+    'bg-web',
+    'bg-fe',
+    'bg-tdd',
+    'bg-error',
+    'bg-flutter'
+  ],
   variants: {
     fill: ['hover', 'focus']
   },
