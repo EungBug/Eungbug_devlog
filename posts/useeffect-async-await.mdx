@@ -1,0 +1,60 @@
+---
+title: '[에러 해결] useEffect에서 async/await 함수 사용하기'
+date: 2024-01-22 22:00
+description: 개발하면서 useEffect에서 비동기 처리를 하려다 발생한 에러 해결
+category: [Web, Error]
+---
+
+useEffect 훅 내에서 async/await 함수를 통해 비동기 처리를 아래와 같이 하려고 하다가
+
+```
+useEffect(async () => {
+	const res = await fetchData(id);
+	setData(res);
+}, [id])
+```
+
+`Argument of type '() => Promise<void>' is not assignable to parameter of type 'EffectCallback'.`
+위와 같은 에러가 발생했다.
+
+에러가 발생한 이유는 async/await 함수는 `Promise 객체`를 리턴하기 때문에 부수효과 함수가 될 수 없기 때문이다.  
+useEffect는 콜백 함수가 아무것도 반환하지 않거나 cleanup 함수를 반환해야 하는데 콜백함수 내에서 async/await 구문을 직접적으로 사용하면서 Promise를 반환하기 때문이다.
+
+---
+
+첫 번째 해결 방법으로는 useEffect 훅 내에서 async/await 함수를 만들고 바로 호출하는 방법이다.
+
+```
+useEffect(() => {
+	const getData = async () => {
+		const res = await fetchData(id);
+		setData(res);
+	}
+	getData();
+}, [id])
+```
+
+두 번째로는 getData 함수를 재사용 하는 경우나 useEffect 외부에서 데이터를 가져와야하는 경우 등 비동기 함수를 `useCallback`으로 래핑한 뒤 useEffect내에서 호출하는 방식이 있다.  
+이때 종속성 배열을 주의해야한다.
+
+```
+const getData = useCallback(async () => {
+	const res = await fetchData(id);
+	setData(res);
+}, [id])
+
+useEffect(() => {
+	getData();
+}, [getData])
+```
+
+마지막으로는 `즉시실행함수`를 통해 useEffect 내에서 바로 실행하는 경우도 있다.
+
+```
+useEffect(() => {
+	(async () => {
+		const res = await fetchData(id);
+		setData(res);
+	})();
+}, [id])
+```
