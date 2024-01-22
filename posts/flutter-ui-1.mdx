@@ -1,0 +1,76 @@
+---
+title: '[Flutter] UI Study 1'
+date: 2024-01-15
+description: Flutter UI를 연습하면서 배운 점을 기록합니다.
+category: [Flutter, TIL]
+---
+
+# MaterialApp vs CupertinoApp
+
+Flutter는 Material Design 또는 Cupertino Design 중 하나를 선택해야 한다.  
+Material은 Android 디자인이고, Cupertino는 iOS 디자인이라 무엇을 선택했는지에 따라 위젯들의 디자인도 달라지게 된다.
+
+```dart
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp();
+  }
+}
+```
+
+# Assets 설정과 yaml 파일
+
+Image와 같은 asset은 따로 `assets`와 같은 폴더에 따로 관리하게 되며, 프로젝트 내부에서 사용하고자 할 때 yaml 파일에 assets의 경로를 설정해줘야 한다.
+
+```dart
+flutter:
+	assets:
+		- assets/a.jpeg
+		- assets/b.jpeg
+```
+
+# Padding
+
+- EdgeInserts.all() : 왼쪽, 오른쪽, 위, 아래 전체 방향에 여백을 줄 때
+- EdgeInserts.only() : 4방향 중 원하는 곳만 여백을 줄 때
+- EdgeInserts.symmetric(): 수직이나 수평 중 여백을 줄 때 사용
+
+# Image Widget Fit
+
+- BoxFit.contain : 원본 사진의 가로 세로 비율 변화 없음
+- BoxFit.fill : 원본 사진의 비율을 무시하고 영역에 사진 크기를 맞춤
+- BoxFit.cover: 원본 사진의 가로 세로 비율을 유지한 채 영역에 사진을 맞추지만 영역을 벗어나면 잘릴 수 있음
+
+# Expanded Widget
+
+Expanded Widget은 위젯을 확장하여 남은 공간을 채울 수 있도록 하는 위젯이다.
+flex 속성을 가지고 있어 남은 공간에 대한 비율을 지정할 수 있다.
+
+# Container Widget
+
+Container 위젯은 빈 박스 위젯으로 div와 같은 역할을 한다.
+Container에는 decoration 속성이 있어서 박스의 모양이나 스타일을 변경할 수 있다.
+
+## Container Widget의 특징
+
+- 자식이 없는 Container는 가능한 한 크게 만들려고 한다.
+- 자식이 있는 Container는 자식 크기에 맞게 줄어든다.
+
+# AspectRatio Widget
+
+AspectRatio 위젯은 특정 종횡비로 자식의 크기를 변경하는 위젯이다.
+이미지의 비율을 정하여 표시할 때 주로 사용한다.
+
+```dart
+AspectRatio(
+	aspectRatio: 2 / 1,
+	child:
+		Image.asset(
+			 "assets/images/$imageName.jpeg",
+			 fit: BoxFit.cover,
+		),
+),
+```
