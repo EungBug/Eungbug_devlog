@@ -1,0 +1,106 @@
+---
+title: react-hook-form을 사용하여 form을 구현해봤다.
+date: 2024-01-25
+description: 복잡했던 form 유효성 검사를 react-hook-form으로 단순화하기
+category: [Web, TIL]
+---
+
+# react-hook-form 라이브러리로 form 구현하기
+
+회사에서 프로젝트를 진행하면서 많은 부분에서 form을 사용하고 있고, 입력값이 많을 수록 많은 state가 필요하다. react-hook-form을 사용할 경우 state 선언 없이 입력 값들을 핸들링 할 수 있으며, 필수 입력 체크, validation 등 유용한 부분이 많기 때문에 react-hook-form 라이브러리를 사용해봤다.
+
+react-hook-form 라이브러리를 사용하면서 작성했던 코드를 되돌아보고 다른 프로젝트에서도 사용하게 된다면 참고도 할 겸 정리하려고 한다.
+
+## 시작하기
+
+자세한 내용은 [공식문서](https://www.react-hook-form.com/)를 통해 확인할 수 있다.
+
+먼저, 설치를 해준다.
+
+```bash
+$ npm i react-hook-form
+```
+
+useForm hook을 통해 이미 정의된 다양한 함수와 객체들을 사용할 수 있다.
+
+나의 경우 CustomInput 컴포넌트를 생성해서 사용하고 있어 react-hook-form에서 제공하는 Controller를 통해 사용자정의 Input을 그릴 수 있도록 하였다.
+
+```
+const {
+  control,
+  handleSubmit,
+  setError,
+  formState: { isSubmitting, isDirty }
+} = useForm();
+```
+
+handleSubmit 함수를 통해 form 양식이 제출될 때 FieldValues 타입의 data 객체를 통해 Input에서 입력한 값들을 가져올 수 있다.  
+또한 setError함수를 통해 사용자 정의 예외처리를 할 수 있다.
+
+react-hook-form의 장점 중 하나로 rules에 다양한 validation 규칙을 작성하여 Input의 유효성 검사를 쉽게 할 수 있다.  
+react-hook-form 없이 일반적으로 form을 구현할 경우 입력 시 또는 submit 시 하나하나 유효성 검사를 하고 예외처리를 해야하는데 rules에 검사하고자 하는 옵션들을 작성하면 된다.
+
+```
+const login = (data: FieldValues) => {
+    console.log(data);
+    if (data.userId !== 'test@gmail.com' || data.password !== '1234') {
+      setError('password', {message: '이메일 또는 비밀번호를 확인해주세요.'})
+    }
+  }
+
+  return (
+    <form
+      className="max-w-screen-sm"
+      onSubmit={handleSubmit(login)}>
+      <h2 className="mb-5 self-center text-3xl font-bold">Login</h2>
+      <div className='flex flex-col gap-3'>
+      <Controller
+        control={control}
+        name="userId"
+        rules={{ required: '이메일을 입력해주세요'}}
+        render={({ field, fieldState: { error } }) => (
+          <InputField
+            label="이메일"
+            name="userId"
+            value={field.value}
+            onChange={field.onChange}
+            placeholder="이메일 입력"
+            errorMessage={error?.message}
+            type="email"
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="password"
+        rules={{required: '비밀번호를 입력해주세요.'}}
+        render={({ field, fieldState: { error } }) => (
+          <InputField
+            label="비밀번호"
+            name="password"
+            value={field.value}
+            onChange={field.onChange}
+            placeholder="비밀번호 입력"
+            errorMessage={error?.message}
+            type="password"
+          />
+        )}
+        />
+      </div>
+
+      <button
+        className="mt-5 h-12 w-full disabled:!bg-gray-400 bg-amber-400 text-white rounded-lg"
+        type="submit"
+        disabled={!isDirty || isSubmitting}>
+        로그인
+      </button>
+    </form>
+  )
+```
+
+예제 코드에 작성한 기능이나 옵션 외에도 다양한 옵션들을 제공하고 있기 때문에 form 구현에 있어서 시간을 단축시켜주고 state를 최소화 할 수 있으며 좀 더 직관적으로 개발할 수 있게 되었다.
+
+[![로그인 폼 유효성 검사](https://i.postimg.cc/VNKy1kwG/Monosnap-Vite-React-TS-2024-01-25-23-00-37.png)](https://postimg.cc/JyHY5mGZ)
+
+이렇게 커스텀 에러를 발생시킬 수 있고, pattern 옵션을 통해 정규식을 통한 유효성 검사도 가능하다.
+[![커스텀 에러](https://i.postimg.cc/rpwV5bFH/Monosnap-Vite-React-TS-2024-01-25-23-07-32.png)](https://postimg.cc/0zh1sVSG)
